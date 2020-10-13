@@ -1,0 +1,76 @@
+{
+	"info": {
+		"_postman_id": "1d8d8d61-95f4-4293-8a50-267db68d26c8",
+		"name": "API Testing",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET * employees",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8690c963-4036-4f79-a6e0-2ff0bc3458d4",
+						"exec": [
+							"//GET Status Code\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"//Status code has string Okay\r",
+							"pm.test(\"Status code name has string Okay\", function () {\r",
+							"    pm.response.to.have.status(\"OK\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}/employees",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"employees"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "e357e257-dee3-4e8d-8bd0-e7e28c48409d",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "25d3794e-e691-446c-ab30-44b3a05cc96e",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "047d6ee6-5f68-472d-9565-fcaabcff910c",
+			"key": "baseurl",
+			"value": "http://dummy.restapiexample.com/api/v1"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
