@@ -6,41 +6,390 @@
 	},
 	"item": [
 		{
-			"name": "GET * employees",
-			"event": [
+			"name": "GET",
+			"item": [
 				{
-					"listen": "test",
-					"script": {
-						"id": "8690c963-4036-4f79-a6e0-2ff0bc3458d4",
-						"exec": [
-							"//GET Status Code\r",
-							"pm.test(\"Status code is 200\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});\r",
-							"\r",
-							"//Status code has string Okay\r",
-							"pm.test(\"Status code name has string Okay\", function () {\r",
-							"    pm.response.to.have.status(\"OK\");\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
+					"name": "GET * employees",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8690c963-4036-4f79-a6e0-2ff0bc3458d4",
+								"exec": [
+									"//GET Status Code\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"//Status code has string Okay\r",
+									"pm.test(\"Status code name has string Okay\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/employees",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"employees"
+							]
+						},
+						"description": "GET All Employees"
+					},
+					"response": []
+				},
+				{
+					"name": "GET first Employee Details",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "be0641d9-04b5-470e-9a31-428dad4f20ed",
+								"exec": [
+									"//Ensures SUCCESS Status was in the body of the response\r",
+									"pm.test(\"Confirm SUCCESS Status\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"success\");\r",
+									"});\r",
+									"\r",
+									"//Check for Status CODE 200\r",
+									"pm.test(\"Status code is 200 OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/employee/1",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"employee",
+								"1"
+							]
+						},
+						"description": "GET First Employee Details"
+					},
+					"response": []
+				},
+				{
+					"name": "GET User record",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8555195a-1dfe-4ffd-880f-f2353dcad8a1",
+								"exec": [
+									"//Status Code is 200\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{reqres}}/users/2",
+							"host": [
+								"{{reqres}}"
+							],
+							"path": [
+								"users",
+								"2"
+							]
+						},
+						"description": "Get user record"
+					},
+					"response": []
 				}
 			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{baseurl}}/employees",
-					"host": [
-						"{{baseurl}}"
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "POST",
+			"item": [
+				{
+					"name": "Create new user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0855ee48-795f-4140-a05c-50148b285e08",
+								"exec": [
+									"//Print Successful message\r",
+									"pm.test(\"Successful message for new user creation\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Successfully! Record has been added.\");\r",
+									"});\r",
+									"\r",
+									"//Status 200 OKAY\r",
+									"pm.test(\"Ensure Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"//Successful POST request\r",
+									"pm.test(\"Successful POST request\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
 					],
-					"path": [
-						"employees"
-					]
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\":\"Rhydwharn\",\"salary\":\"250000\",\"age\":\"28\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/create",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"create"
+							]
+						},
+						"description": "Create new user"
+					},
+					"response": []
+				},
+				{
+					"name": "CREATE User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b77ff657-f587-494a-b7c9-cc9ae1485ca2",
+								"exec": [
+									"//Successful POST\r",
+									"pm.test(\"Successful POST request\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Ridwan\",\r\n    \"job\": \"Administrator\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{reqres}}/users",
+							"host": [
+								"{{reqres}}"
+							],
+							"path": [
+								"users"
+							]
+						},
+						"description": "Creating new user"
+					},
+					"response": []
+				},
+				{
+					"name": "LOGIN",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a38baf66-0bf2-4b11-8ef5-3f1847a1b333",
+								"exec": [
+									"//Status code is 200\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"//Ensures Token was Generated\r",
+									"pm.test(\"Token Generated\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"token\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"eve.holt@reqres.in\",\r\n\t\"password\": \"cityslicka\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{reqres}}/login",
+							"host": [
+								"{{reqres}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "UPDATE",
+			"item": [
+				{
+					"name": "UPDATE user record",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "bf11cdd1-55bd-4ad3-a1ef-4d323ad3a4fb",
+								"exec": [
+									"//Success Message in response\r",
+									"pm.test(\"Success Message\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"success\");\r",
+									"});\r",
+									"\r",
+									"//Message: Successfully! Record has been updated.\r",
+									"pm.test(\"Successful message on successful update\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Successfully! Record has been updated.\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"employee_name\": \"Ridwan Abdulazeez\",\r\n   \"employee_salary\": 1000000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/update/1",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"update",
+								"1"
+							]
+						},
+						"description": "UPDATE User records"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "DELETE",
+			"item": [
+				{
+					"name": "DELETE User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b58aa070-61ac-4d9a-9ed2-cd5e2951cde2",
+								"exec": [
+									"//Status code is 200\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"//Message: Record successfully deleted\r",
+									"pm.test(\"Successfully! Record has been deleted message\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Successfully! Record has been deleted\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/delete/1217",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"delete",
+								"1217"
+							]
+						},
+						"description": "DELETE users"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
 		}
 	],
 	"event": [
@@ -67,7 +416,7 @@
 	],
 	"variable": [
 		{
-			"id": "047d6ee6-5f68-472d-9565-fcaabcff910c",
+			"id": "88d474fa-c750-4286-8fc8-b196f732a4f3",
 			"key": "baseurl",
 			"value": "http://dummy.restapiexample.com/api/v1"
 		}
